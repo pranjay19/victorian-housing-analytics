@@ -37,13 +37,17 @@ function deduplicateBySuburb(rows) {
     const key = row.suburb.trim().toLowerCase();
     if (map.has(key)) {
       const existing = map.get(key);
-      // Sum the property counts across bedroom breakdown rows
+      // To get a mathematically correct and stable average price across rows,
+      // we calculate the total value, sum the counts, and do a weighted average.
+      const currentTotalValue = existing.average_price * existing.property_count;
+      const newTotalValue = row.average_price * row.property_count;
+      
       existing.property_count += row.property_count;
-      // Recalculate weighted average price if prices differ
-      // (they are currently the same across rows, but future-proofing)
-      existing.average_price = Math.round(
-        (existing.average_price + row.average_price) / 2
-      );
+      
+      // Calculate true weighted average (safeguard against division by zero)
+      if (existing.property_count > 0) {
+        existing.average_price = (currentTotalValue + newTotalValue) / existing.property_count;
+      }
     } else {
       map.set(key, { ...row });
     }

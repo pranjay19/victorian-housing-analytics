@@ -325,7 +325,7 @@ export default function ArchitectureModal({ isOpen, onClose }) {
                 <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
                   <div className="flex items-center gap-2 text-cyan-400 font-bold text-sm">
                     <ShieldCheck className="w-4 h-4" />
-                    Medallion Architecture (Bronze $\rightarrow$ Silver $\rightarrow$ Gold)
+                    Medallion Architecture (Bronze → Silver → Gold)
                   </div>
                   <p className="text-xs text-slate-300 leading-relaxed">
                     Decouples data ingestion from business transformation. Raw data is stored immutably in S3 Bronze, cleansed & standardized into S3 Silver Parquet format, and aggregated into S3 Gold for fast executive reporting.

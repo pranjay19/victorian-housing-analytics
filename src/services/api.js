@@ -11,11 +11,10 @@
  *   (b) Add a serverless proxy (e.g. Vercel rewrite, Netlify redirect, CloudFront)
  */
 
-// In development: use Vite proxy (/api → API Gateway) — no CORS
-// In production build: call the API Gateway directly (requires CORS enabled on Lambda)
-const API_ENDPOINT = import.meta.env.DEV
-  ? '/api/housing'
-  : 'https://6annl8u42a.execute-api.ap-southeast-2.amazonaws.com/prod/housing';
+// Always use the /api/housing proxy path — NEVER call the AWS URL directly from the browser.
+// The Vite dev + preview servers proxy /api/* → AWS API Gateway server-side (no CORS).
+// For deployed production builds, configure a rewrite rule on your host (see vercel.json / _redirects).
+const API_ENDPOINT = '/api/housing';
 
 /**
  * Deduplicate and aggregate raw API rows by suburb.

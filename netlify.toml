@@ -1,0 +1,14 @@
+# Netlify redirect rule — proxies /api/* to AWS API Gateway server-side.
+# This eliminates CORS because Netlify's edge makes the request, not the browser.
+
+[[redirects]]
+  from   = "/api/*"
+  to     = "https://6annl8u42a.execute-api.ap-southeast-2.amazonaws.com/prod/:splat"
+  status = 200
+  force  = true
+
+# SPA fallback — all other routes serve index.html (required for React Router)
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200

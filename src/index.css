@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* Explicitly tell Tailwind v4 to scan all source files */
+@source "../src/**/*.{js,jsx,ts,tsx}";
+@source "../index.html";
+
 /* ============================================================
    DESIGN TOKENS & THEME OVERRIDES
    ============================================================ */
@@ -10,16 +14,8 @@
 
 /* ============================================================
    GLOBAL RESET & BASE
-   Force dark background across all elements — no white leaking
+   Force dark background — no white leaking from browser defaults
    ============================================================ */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
 html {
   height: 100%;
   background-color: #020617; /* slate-950 */
@@ -32,7 +28,7 @@ html {
 
 body {
   min-height: 100%;
-  background-color: #020617; /* slate-950 */
+  background-color: #020617;
   color: #f1f5f9;
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
@@ -41,12 +37,6 @@ body {
   min-height: 100vh;
   background-color: #020617;
   color: #f1f5f9;
-}
-
-/* Override any stray heading styles from Vite boilerplate */
-h1, h2, h3, h4, h5, h6, p {
-  margin: 0;
-  padding: 0;
 }
 
 /* ============================================================
@@ -107,7 +97,7 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 /* ============================================================
-   RECHARTS TOOLTIP FIX — force dark background
+   RECHARTS TOOLTIP — force dark background
    ============================================================ */
 .recharts-tooltip-wrapper {
   outline: none !important;
